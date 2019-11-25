@@ -1,4 +1,4 @@
-package main
+package contacts
 
 import "fmt"
 
@@ -32,7 +32,7 @@ func (c *ContactManager) Update(ct Contact) {
 }
 
 func (c *ContactManager) Delete(id int) {
-	c.contacts = append(c.contacts[:id], c.contacts[id+1:]...)
+	c.contacts = append(c.contacts	[:id], c.contacts[id+1:]...)
 }
 
 func (c *ContactManager) ListContact(id int) {
@@ -44,26 +44,9 @@ func (c *ContactManager) ListContact(id int) {
 	fmt.Println("-------------")
 }
 
-func (c *ContactManager) ListAll() {
+func (c *ContactManager) ListAll() []Contact{
 	for i, _ := range c.contacts{
 		c.ListContact(i)
 	}
-}
-
-
-func main() {
-	c := New()
-	ct:=Contact{0,"Khamidullokh","male",901233323,"kholikov.x@gmail.com"}
-	ct1:=Contact{1,"Temur","male",951251515,"temur@gmail.com"}
-	ct2:=Contact{2,"Akbar","male",912555225,"Urazbaev@gmail.com"}
-	ct3:=Contact{3,"Hamidulloh","male",1561556,"Hamidulloh@gmail.com"}
-	c.Add(ct)
-	c.Add(ct1)
-	c.Add(ct2)
-	c.Add(ct3)
-	c.ListAll()
-	ct4:=Contact{2,"Dilmurod","male",941562156,"dilmurod@gmail.com"}
-	c.Update(ct4)
-	c.ListAll()
-	c.ListContact(0)
+	return c.contacts
 }
