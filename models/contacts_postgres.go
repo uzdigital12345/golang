@@ -10,6 +10,7 @@ const (
 	username = "postgres"
 	password = "123"
 	dbname = "testdb"
+	dbname2 = "task_list"
 )
 
 
