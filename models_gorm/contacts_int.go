@@ -1,12 +1,15 @@
 package models
 
+import "github.com/jinzhu/gorm"
+
 type Contact struct {
-	Id uint
+	gorm.Model
 	Age int
 	Name string
 	Gender string
 	PhoneNumber string
 }
+
 
 type ContactManagerInterface interface {
 	Add(c Contact) error
@@ -14,4 +17,5 @@ type ContactManagerInterface interface {
 	Delete(i uint) error
 	ListAll() error
 	GetAll() ([]Contact,error)
+	GetPaging(page int,limit int) ([]Contact,error)
 }

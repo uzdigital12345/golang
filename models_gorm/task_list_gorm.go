@@ -25,55 +25,55 @@ func  NewTaskList() (TaskListInterface,error){
 	return &nw,nil
 }
 
-func (g GormDB) TableName() string {
+func (g *GormDB) TableName() string {
 	return "task_list_info"
 }
 
-func (g GormDB) Add(t TaskList) error {
+func (g *GormDB) Add(t TaskList) error {
 	err = g.db.Create(&t).Error
 	return Error(err)
 }
 
-func (g GormDB) UpdateTitle(id uint,title string) error {
+func (g *GormDB) UpdateTitle(id uint,title string) error {
 	err = g.db.Model(&TaskList{}).Where("id = ?",id).Update("title",title).Error
 	return Error(err)
 }
 
-func (g GormDB) Delete(id uint) error{
+func (g *GormDB) Delete(id uint) error{
 	err = g.db.Where("id = ?",id).Delete(&TaskList{}).Error
 	return Error(err)
 }
 
-func(g GormDB) MakeDone(id uint) error {
+func(g *GormDB) MakeDone(id uint) error {
 	err = g.db.Model(&TaskList{}).Where("id = ?",id).Update("done = true").Error
 	return Error(err)
 }
 
-func (g GormDB) ListTask(id uint) error {
+func (g *GormDB) ListTask(id uint) error {
 	var taskList []TaskList
 	err = g.db.Where("id = ?",id).First(&taskList).Error
 	return ErrorPrint(err,taskList)
 }
 
-func (g GormDB) ListUnfinishedTasks() error {
+func (g *GormDB) ListUnfinishedTasks() error {
 	var taskList []TaskList
 	err = g.db.Where("done = false ").Find(&taskList).Error
 	return ErrorPrint(err,taskList)
 }
 
-func (g GormDB) ListOverdueTasks() error {
+func (g *GormDB) ListOverdueTasks() error {
 	var taskList [] TaskList
 	err = g.db.Where("done = false and deadline > now()").Find(&taskList).Error
 	return ErrorPrint(err,taskList)
 }
 
-func (g GormDB) ListAll() error {
+func (g *GormDB) ListAll() error {
 	var taskList [] TaskList
 	err = g.db.Find(&taskList).Error
 	return ErrorPrint(err,taskList)
 }
 
-func (g GormDB) GetAll() ([]TaskList, error) {
+func (g *GormDB) GetAll() ([]TaskList, error) {
 	var taskList [] TaskList
 	err = g.db.Find(&taskList).Error
 	return taskList,Error(err)

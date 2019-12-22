@@ -1,7 +1,9 @@
 package models
 
+import "github.com/jinzhu/gorm"
+
 type TaskList struct {
-	Id       uint
+	gorm.Model
 	Assignee string
 	Title    string
 	Deadline string

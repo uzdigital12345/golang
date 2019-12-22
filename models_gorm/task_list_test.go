@@ -1,6 +1,7 @@
 package models
 
 import (
+	"github.com/jinzhu/gorm"
 	"testing"
 )
 
@@ -17,10 +18,10 @@ func TestNewTaskList(t *testing.T) {
 
 func TestGormDB_Add(t *testing.T) {
 	a, err = NewTaskList()
-	t1 := TaskList{6,"Abdurahmon","backend","2020.01.01",false}
-	t2 := TaskList{7,"Doniyor","frontend","2020.01.15",false}
-	t3 := TaskList{8,"Jahongir","testing system","2020.01.15",false}
-	t4 := TaskList{9,"Temur","design","2019.12.28",true}
+	t1 := TaskList{gorm.Model{},"Abdurahmon","backend","2020.01.01",false}
+	t2 := TaskList{gorm.Model{},"Doniyor","frontend","2020.01.15",false}
+	t3 := TaskList{gorm.Model{},"Jahongir","testing system","2020.01.15",false}
+	t4 := TaskList{gorm.Model{},"Temur","design","2019.12.28",true}
 	if err != nil {
 		t.Error("Can't Add", err)
 	}

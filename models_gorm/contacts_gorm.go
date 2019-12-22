@@ -33,8 +33,8 @@ func NewContactManagerInterface() (ContactManagerInterface,error) {
 		panic(err.Error())
 		return nil,err
 	}
-	nw.db.DropTableIfExists(&Contact{})
-	nw.db.CreateTable(&Contact{})
+	//nw.db.DropTableIfExists(&Contact{})
+	//nw.db.CreateTable(&Contact{})
 	return &nw,nil
 }
 
@@ -72,6 +72,17 @@ func (g *GormDb) GetAll() ([]Contact,error) {
 	err = g.db.Find(&contacts).Error
 	return contacts,Error(err)
 
+}
+
+func (g *GormDb) GetPaging(page int,limit int)([]Contact,error) {
+    var contacts [] Contact
+    offset := (page -1) * limit
+    err = g.db.Limit(limit).Offset(offset).Find(&contacts).Error
+
+	if err != nil {
+		return nil,err
+	}
+	return contacts,err
 }
 
 func ErrorPrintContact(err error,contact []Contact) error {
