@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package proto;
+
+message Task {
+    int64  Id = 1;
+    string Assignee = 2;
+    string Title = 3;
+    string Deadline = 4;
+    bool Done = 5;
+}
+
+message emptyMessage {}
+
+service TaskListManagerInterface {
+     rpc Add(Task) returns (Task) {}
+     rpc UpdateTitle(UpdateTaskRequest) returns(Task) {}
+     rpc Delete(IdRequest) returns(Task) {}
+     rpc MakeDone(IdRequest) returns (Task) {}
+     rpc GetTask(IdRequest) returns (Task) {}
+     rpc GetUnfinishedTasks(emptyMessage) returns (GetTasks) {}
+     rpc GetOverdueTasks(emptyMessage) returns(GetTasks) {}
+     rpc GetAll(emptyMessage) returns(GetTasks) {}
+}
+
+message GetTasks {
+    repeated Task Tasks = 1;
+}
+message IdRequest {
+    int64 Id = 1;
+}
+message UpdateTaskRequest {
+    int64 Id = 1;
+    string Title = 2;
+}

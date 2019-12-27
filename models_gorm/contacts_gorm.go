@@ -24,6 +24,8 @@ func NewContactManagerInterface() (ContactManagerInterface,error) {
 
 	nw := GormDb{}
 
+
+
 	psqlInfo := fmt.Sprintf(" user=%s password =%s dbname = %s sslmode=disable",username,password,dbname)
 
 

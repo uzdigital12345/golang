@@ -12,6 +12,8 @@ func main() {
 		panic(err.Error())
 	}
 
+
+    
 	defer Db.Close()
 	Db.DropTableIfExists(&Owner{},&Book{},&Author{})
 	Db.CreateTable(&Owner{},&Book{},&Author{})
@@ -23,6 +25,7 @@ type Owner struct {
 	FirstName string
 	LastName string
 	Books []Book
+
 
 }
 
